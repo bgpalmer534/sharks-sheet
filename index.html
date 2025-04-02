@@ -1,1 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortable Table</title>
+    <style>
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            margin: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            cursor: pointer;
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+
+
+    <table id="sortableTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">Player</th>
+                <th onclick="sortTable(1)">Team</th>
+                <th onclick="sortTable(2)">Points</th>
+                <th onclick="sortTable(3)">Assists</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John Doe</td>
+                <td>Team A</td>
+                <td>150</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>Team B</td>
+                <td>120</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>Sam Wilson</td>
+                <td>Team A</td>
+                <td>200</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>Chris Lee</td>
+                <td>Team C</td>
+                <td>180</td>
+                <td>20</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <script>
+        let sortDirections = [true, true, true, true];  // Track sort direction for each column
+
+
+        function sortTable(columnIndex) {
+            const table = document.getElementById("sortableTable");
+            const rows = Array.from(table.rows).slice(1); // Get all rows, excluding the header row
+
+
+            // Determine if the column contains numeric values or text
+            const isNumeric = !isNaN(rows[0].cells[columnIndex].innerText);
+
+
+            // Sort the rows based on the clicked column
+            rows.sort((rowA, rowB) => {
+                const cellA = rowA.cells[columnIndex].innerText;
+                const cellB = rowB.cells[columnIndex].innerText;
+
+
+                if (isNumeric) {
+                    return sortDirections[columnIndex]
+                        ? parseFloat(cellB) - parseFloat(cellA) // Sort descending
+                        : parseFloat(cellA) - parseFloat(cellB); // Sort ascending
+                } else {
+                    return sortDirections[columnIndex]
+                        ? cellB.localeCompare(cellA) // Sort descending
+                        : cellA.localeCompare(cellB); // Sort ascending
+                }
+            });
+
+
+            // Reorder the rows based on the sorted order
+            table.tBodies[0].append(...rows);
+
+
+            // Toggle the sort direction for the next click
+            sortDirections[columnIndex] = !sortDirections[columnIndex];
+        }
+    </script>
+
+
+</body>
+</html>
+
 
