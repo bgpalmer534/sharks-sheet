@@ -9,21 +9,22 @@
         h1 {
             text-align: center;
             font-size: 2em;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
-        /* Flexbox layout for the content */
-        .container {
+        /* Flexbox container for the title and image */
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin: 20px;
         }
 
-        /* Ensure the image has proper alignment */
+        /* Image container positioned at the top left */
         .image-container img {
             width: 345px;
             height: 300px;
+            margin-left: 20px;
         }
 
         /* Table styles */
@@ -48,53 +49,51 @@
 </head>
 <body>
 
-<!-- Centered title -->
-<h1>Sandhill Sharks Rugby</h1>
-
-<!-- Flexbox container for image and table -->
-<div class="container">
-    <table id="sortableTable">
-        <thead>
-            <tr>
-                <th onclick="sortTable(0)">Player</th>
-                <th onclick="sortTable(1)">Team</th>
-                <th onclick="sortTable(2)">Points</th>
-                <th onclick="sortTable(3)">Assists</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>John Doe</td>
-                <td>Team A</td>
-                <td>150</td>
-                <td>25</td>
-            </tr>
-            <tr>
-                <td>Jane Smith</td>
-                <td>Team B</td>
-                <td>120</td>
-                <td>30</td>
-            </tr>
-            <tr>
-                <td>Sam Wilson</td>
-                <td>Team A</td>
-                <td>200</td>
-                <td>15</td>
-            </tr>
-            <tr>
-                <td>Chris Lee</td>
-                <td>Team C</td>
-                <td>180</td>
-                <td>20</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- Image container, positioned to the right -->
+<!-- Header with image on the left and title centered -->
+<div class="header">
     <div class="image-container">
         <img src="sharkslogo.png" alt="Sharks Logo">
     </div>
+    <h1>Sandhill Sharks Rugby</h1>
 </div>
+
+<!-- Table with sortable columns -->
+<table id="sortableTable">
+    <thead>
+        <tr>
+            <th onclick="sortTable(0)">Player</th>
+            <th onclick="sortTable(1)">Team</th>
+            <th onclick="sortTable(2)">Points</th>
+            <th onclick="sortTable(3)">Assists</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>John Doe</td>
+            <td>Team A</td>
+            <td>150</td>
+            <td>25</td>
+        </tr>
+        <tr>
+            <td>Jane Smith</td>
+            <td>Team B</td>
+            <td>120</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>Sam Wilson</td>
+            <td>Team A</td>
+            <td>200</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>Chris Lee</td>
+            <td>Team C</td>
+            <td>180</td>
+            <td>20</td>
+        </tr>
+    </tbody>
+</table>
 
 <script>
     let sortDirections = [true, true, true, true];  // Track sort direction for each column
