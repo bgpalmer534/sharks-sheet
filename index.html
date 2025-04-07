@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sandhill Sharks Rugby</title>
     <style>
+        /* Center the title horizontally */
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        /* Flexbox layout for the content */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px;
+        }
+
+        /* Ensure the image has proper alignment */
+        .image-container img {
+            width: 345px;
+            height: 300px;
+        }
+
+        /* Table styles */
         table {
             width: 60%;
             border-collapse: collapse;
@@ -26,9 +48,11 @@
 </head>
 <body>
 
-<div>
-    <img src="sharkslogo.png" style="width:345px;height:300px;" alt="Sharks Logo">
-</div>
+<!-- Centered title -->
+<h1>Sandhill Sharks Rugby</h1>
+
+<!-- Flexbox container for image and table -->
+<div class="container">
     <table id="sortableTable">
         <thead>
             <tr>
@@ -66,49 +90,45 @@
         </tbody>
     </table>
 
+    <!-- Image container, positioned to the right -->
+    <div class="image-container">
+        <img src="sharkslogo.png" alt="Sharks Logo">
+    </div>
+</div>
 
-    <script>
-        let sortDirections = [true, true, true, true];  // Track sort direction for each column
+<script>
+    let sortDirections = [true, true, true, true];  // Track sort direction for each column
 
+    function sortTable(columnIndex) {
+        const table = document.getElementById("sortableTable");
+        const rows = Array.from(table.rows).slice(1); // Get all rows, excluding the header row
 
-        function sortTable(columnIndex) {
-            const table = document.getElementById("sortableTable");
-            const rows = Array.from(table.rows).slice(1); // Get all rows, excluding the header row
+        // Determine if the column contains numeric values or text
+        const isNumeric = !isNaN(rows[0].cells[columnIndex].innerText);
 
+        // Sort the rows based on the clicked column
+        rows.sort((rowA, rowB) => {
+            const cellA = rowA.cells[columnIndex].innerText;
+            const cellB = rowB.cells[columnIndex].innerText;
 
-            // Determine if the column contains numeric values or text
-            const isNumeric = !isNaN(rows[0].cells[columnIndex].innerText);
+            if (isNumeric) {
+                return sortDirections[columnIndex]
+                    ? parseFloat(cellB) - parseFloat(cellA) // Sort descending
+                    : parseFloat(cellA) - parseFloat(cellB); // Sort ascending
+            } else {
+                return sortDirections[columnIndex]
+                    ? cellB.localeCompare(cellA) // Sort descending
+                    : cellA.localeCompare(cellB); // Sort ascending
+            }
+        });
 
+        // Reorder the rows based on the sorted order
+        table.tBodies[0].append(...rows);
 
-            // Sort the rows based on the clicked column
-            rows.sort((rowA, rowB) => {
-                const cellA = rowA.cells[columnIndex].innerText;
-                const cellB = rowB.cells[columnIndex].innerText;
-
-
-                if (isNumeric) {
-                    return sortDirections[columnIndex]
-                        ? parseFloat(cellB) - parseFloat(cellA) // Sort descending
-                        : parseFloat(cellA) - parseFloat(cellB); // Sort ascending
-                } else {
-                    return sortDirections[columnIndex]
-                        ? cellB.localeCompare(cellA) // Sort descending
-                        : cellA.localeCompare(cellB); // Sort ascending
-                }
-            });
-
-
-            // Reorder the rows based on the sorted order
-            table.tBodies[0].append(...rows);
-
-
-            // Toggle the sort direction for the next click
-            sortDirections[columnIndex] = !sortDirections[columnIndex];
-        }
-    </script>
-
+        // Toggle the sort direction for the next click
+        sortDirections[columnIndex] = !sortDirections[columnIndex];
+    }
+</script>
 
 </body>
 </html>
-
-
