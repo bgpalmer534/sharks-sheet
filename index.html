@@ -7,31 +7,30 @@
     <style>
         /* Center the title horizontally */
         h1 {
-            text-align: center;
             font-size: 2em;
-            margin-top: 20px;
+            margin: 0;
         }
 
-        /* Flexbox container for the title and image */
+        /* Flexbox container for image and title */
         .header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px;
+            align-items: center; /* Vertically center the items */
+            justify-content: center; /* Center the items horizontally */
+            width: 100%;
+            position: relative;
         }
 
-        /* Image container positioned at the top left */
-        .image-container img {
-            width: 345px;
-            height: 300px;
-            margin-left: 20px;
+        /* Image positioned in the top left */
+        .image-container {
+            position: absolute;
+            left: 20px;
         }
 
         /* Table styles */
         table {
             width: 60%;
             border-collapse: collapse;
-            margin: auto;
+            margin: 20px auto;
         }
         th, td {
             padding: 10px;
@@ -49,14 +48,16 @@
 </head>
 <body>
 
-<!-- Header with image on the left and title centered -->
+<!-- Header with image on the left and title horizontally centered -->
 <div class="header">
+    <!-- Image in the top left -->
     <div class="image-container">
-        <img src="sharkslogo.png" alt="Sharks Logo">
+        <img src="sharkslogo.png" alt="Sharks Logo" style="width: 345px; height: 300px;">
     </div>
-</div>
 
-<h1>Sandhill Sharks Rugby</h1>
+    <!-- Title centered in the space -->
+    <h1>Sandhill Sharks Rugby</h1>
+</div>
 
 <!-- Table with sortable columns -->
 <table id="sortableTable">
